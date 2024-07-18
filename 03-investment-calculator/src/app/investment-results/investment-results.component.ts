@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { InvestmentService } from '../investment.service';
 
 @Component({
@@ -12,7 +12,6 @@ import { InvestmentService } from '../investment.service';
 export class InvestmentResultsComponent {
   private investmentService = inject(InvestmentService);
 
-  get results() {  // getter para exponer los datos en el template
-    return this.investmentService.resultData;
-  }
+  results = computed(() => this.investmentService.resultData())  
+  //esults = this.investmentService.resultData.asReadonly(); // ambas son correctas como signals
 }
